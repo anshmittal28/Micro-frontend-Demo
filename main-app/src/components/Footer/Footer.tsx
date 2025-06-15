@@ -4,7 +4,7 @@ import '../../styles/shared.scss';
 const Footer = () => {
   return (
     <footer className="footer">
-    <p>&copy; 2024 Micro-Frontend Demo</p>
+    <p>&copy; 2025 Micro-Frontend Demo</p>
   </footer>
   )
 }

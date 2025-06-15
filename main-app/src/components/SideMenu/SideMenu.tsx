@@ -7,10 +7,10 @@ const SideMenu = () => {
     <nav className="side-menu">
       <ul>
         <li>
-          <Link to="/">Photo Gallery</Link>
+          <Link to="/">App 1</Link>
         </li>
         <li>
-          <Link to="/placeholder">Placeholder App</Link>
+          <Link to="/app2">App 2</Link>
         </li>
       </ul>
     </nav>
