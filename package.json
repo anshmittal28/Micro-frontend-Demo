@@ -4,18 +4,18 @@
   "private": true,
   "workspaces": [
     "main-app",
-    "photo-gallery",
-    "placeholder"
+    "app1"
   ],
   "scripts": {
-    "start": "concurrently \"npm run start:main\" \"npm run start:photo-gallery\" \"npm run start:placeholder\"",
-    "start:main": "cd main-app && npm start",
-    "start:photo-gallery": "cd photo-gallery && npm start",
-    "start:placeholder": "cd placeholder && npm start",
-    "build": "npm run build:main && npm run build:photo-gallery && npm run build:placeholder",
+    "start": "concurrently \"npm run start:main-app\" \"npm run start:app1\"",
+    "start:main-app": "cd main-app && npm start",
+    "start:app1": "cd app1 && npm start",
+    "install:all": "npm install && npm run install:main-app && npm run install:app1",
+    "install:main": "cd main-app && npm install",
+    "install:app1": "cd app1 && npm install",
+    "build": "concurrently \"npm run build:main-app\" \"npm run build:app1\"",
     "build:main": "cd main-app && npm run build",
-    "build:photo-gallery": "cd photo-gallery && npm run build",
-    "build:placeholder": "cd placeholder && npm run build"
+    "build:app1": "cd app1 && npm run build"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
