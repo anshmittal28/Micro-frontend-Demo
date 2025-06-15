@@ -1,7 +1,8 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const webpack = require("webpack"); // only add this if you don't have yet
+const webpack = require("webpack");
 const { ModuleFederationPlugin } = webpack.container;
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const path = require("path");
 const deps = require("./package.json").dependencies;
 require("dotenv").config({ path: "./.env" });
 
@@ -63,14 +64,13 @@ module.exports = (env, argv) => {
         },
       ],
     },
-
     plugins: [
       new webpack.EnvironmentPlugin({ BUILD_DATE: buildDate }),
       new webpack.DefinePlugin({
         "process.env": JSON.stringify(process.env),
       }),
       new ModuleFederationPlugin({
-        name: "container",
+        name: "host",
         remotes: {
           app1: "app1@http://localhost:3001/remoteEntry.js",
         },

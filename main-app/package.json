@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "concurrently": "^8.2.2",
     "css-loader": "^7.1.2",
     "customize-cra": "^1.0.0",
     "react-app-rewired": "^2.2.1",
@@ -41,7 +42,9 @@
     "style-loader": "^4.0.0"
   },
   "scripts": {
-    "start": "webpack serve",
+    "start": "concurrently \"npm run start:main\" \"npm run start:app1\"",
+    "start:main": "webpack serve",
+    "start:app1": "cd ../app1 && npm start",
     "build": "webpack --mode production",
     "serve": "serve dist -p 3000",
     "clean": "rm -rf dist"

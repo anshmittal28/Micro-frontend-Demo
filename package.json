@@ -7,10 +7,10 @@
     "app1"
   ],
   "scripts": {
-    "start": "concurrently \"npm run start:main-app\" \"npm run start:app1\"",
-    "start:main-app": "cd main-app && npm start",
+    "start": "concurrently \"npm run start:main\" \"npm run start:app1\"",
+    "start:main": "cd main-app && npm start",
     "start:app1": "cd app1 && npm start",
-    "install:all": "npm install && npm run install:main-app && npm run install:app1",
+    "install:all": "npm install && npm run install:main && npm run install:app1",
     "install:main": "cd main-app && npm install",
     "install:app1": "cd app1 && npm install",
     "build": "concurrently \"npm run build:main-app\" \"npm run build:app1\"",
