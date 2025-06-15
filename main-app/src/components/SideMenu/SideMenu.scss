@@ -1,0 +1,33 @@
+.side-menu {
+  width: 200px;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  height: calc(100vh - 120px); // Subtract header and footer height
+  position: fixed;
+  top: 60px; // Header height
+  left: 0;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      margin-bottom: 10px;
+
+      a {
+        color: #333;
+        text-decoration: none;
+        display: block;
+        padding: 10px;
+        border-radius: 4px;
+        transition: background-color 0.2s;
+
+        &:hover {
+          background-color: rgba(52, 152, 219, 0.1);
+        }
+      }
+    }
+  }
+} 

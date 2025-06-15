@@ -1,0 +1,45 @@
+// Variables
+$header-height: 60px;
+$footer-height: 60px;
+$primary-color: #2c3e50;
+$text-color: #333;
+
+// Common styles for fixed position components (Header and Footer)
+.fixed-component {
+  position: fixed;
+  left: 0;
+  right: 0;
+  background-color: $primary-color;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+// Header specific styles
+.header {
+  @extend .fixed-component;
+  top: 0;
+  height: $header-height;
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 0;
+  }
+}
+
+// Footer specific styles
+.footer {
+  @extend .fixed-component;
+  bottom: 0;
+  height: $footer-height;
+
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+} 

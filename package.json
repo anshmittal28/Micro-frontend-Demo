@@ -1,0 +1,23 @@
+{
+  "name": "micro-frontend-demo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "main-app",
+    "photo-gallery",
+    "placeholder"
+  ],
+  "scripts": {
+    "start": "concurrently \"npm run start:main\" \"npm run start:photo-gallery\" \"npm run start:placeholder\"",
+    "start:main": "cd main-app && npm start",
+    "start:photo-gallery": "cd photo-gallery && npm start",
+    "start:placeholder": "cd placeholder && npm start",
+    "build": "npm run build:main && npm run build:photo-gallery && npm run build:placeholder",
+    "build:main": "cd main-app && npm run build",
+    "build:photo-gallery": "cd photo-gallery && npm run build",
+    "build:placeholder": "cd placeholder && npm run build"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+} 
