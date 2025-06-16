@@ -90,3 +90,77 @@ The application is integrated with the main app through Module Federation, allow
 3. Use shared components when appropriate
 4. Keep routing configuration aligned with main app
 5. Follow the established project structure 
+
+## Testing
+
+The application uses Jest and React Testing Library for testing.
+
+### Running Tests
+
+```bash
+# Run all tests
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run tests with coverage
+npm run test:coverage
+```
+
+### Test Structure
+
+```
+src/
+├── __tests__/           # Test files
+│   └── App.test.tsx     # Main application tests
+└── setupTests.ts       # Test setup configuration
+```
+
+### Test Configuration
+
+- Jest is configured to handle TypeScript, SCSS modules, and React components
+- React Testing Library is used for component testing
+- Router context is provided for navigation testing
+
+### Writing Tests
+
+Example test structure:
+
+```typescript
+import { render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
+
+const renderWithRouter = (component: React.ReactElement) => {
+  return render(
+    <BrowserRouter>
+      {component}
+    </BrowserRouter>
+  );
+};
+
+describe('App Component', () => {
+  it('renders correctly', () => {
+    renderWithRouter(<App />);
+    expect(screen.getByText('Expected Text')).toBeInTheDocument();
+  });
+});
+```
+
+### Test Coverage
+
+The test suite includes:
+- Component rendering tests
+- Navigation and routing tests
+- User interaction tests
+
+To generate a coverage report:
+```bash
+npm run test:coverage
+```
+
+This will show:
+- Statement coverage
+- Branch coverage
+- Function coverage
+- Line coverage 

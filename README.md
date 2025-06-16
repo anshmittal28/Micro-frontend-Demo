@@ -1,147 +1,152 @@
 # Micro-Frontend Demo
 
-A demonstration of a micro-frontend architecture using Module Federation with Webpack 5.
+This project demonstrates a micro-frontend architecture using Module Federation with Webpack 5. The application consists of a main container application and two micro-frontends (App1 and App2).
 
-## Project Overview
-
-This project demonstrates a micro-frontend architecture with three applications:
-- Main App (Host) - Port 3000
-- App1 (Remote) - Port 3001
-- App2 (Remote) - Port 3002
-
-## Architecture
+## Project Structure
 
 ```
 micro-frontend-demo/
-├── main-app/          # Host application
-├── app1/             # Remote application 1
-└── app2/             # Remote application 2
+├── main-app/          # Container application (port 3000)
+├── app1/             # First micro-frontend (port 3001)
+└── app2/             # Second micro-frontend (port 3002)
 ```
-
-### Main App (Host)
-- Serves as the container application
-- Manages routing and navigation
-- Integrates remote applications
-- Provides shared components and utilities
-
-### App1 (Remote)
-- Provides dashboard and list functionality
-- Implements infinite scroll
-- Manages photo gallery
-- Handles favorites functionality
-
-### App2 (Remote)
-- Extends main application functionality
-- Independent deployment capability
-- Shared component integration
 
 ## Getting Started
 
-1. Clone the repository:
-```bash
-git clone <repository-url>
-cd micro-frontend-demo
-```
-
-2. Install dependencies for all applications:
+1. Install dependencies for all applications:
 ```bash
 npm install
-cd main-app && npm install
-cd ../app1 && npm install
+cd app1 && npm install
 cd ../app2 && npm install
+cd ..
 ```
 
-3. Start all applications:
+2. Start all applications:
 ```bash
-# From root directory
 npm start
 ```
 
 This will start:
-- Main App on http://localhost:3000
+- Main app on http://localhost:3000
 - App1 on http://localhost:3001
 - App2 on http://localhost:3002
 
-## Development
+## Testing
 
-Each application can be developed independently:
+### App1 Tests
+App1 includes comprehensive test coverage for its components and features:
 
-### Main App
-```bash
-cd main-app
-npm start
-```
+1. Dashboard Tests:
+   - Navigation functionality
+   - Favorites section rendering
+   - Component integration
 
-### App1
+2. List Tests:
+   - Data fetching and rendering
+   - Empty state handling
+   - Error state handling
+   - Navigation between views
+
+3. Navigation Tests:
+   - Link functionality
+   - Route handling
+   - Component rendering
+
+To run App1 tests:
 ```bash
 cd app1
-npm start
+npm test
 ```
 
-### App2
+### App2 Tests
+App2 includes tests for its core functionality:
+
+1. Home Page Tests:
+   - Component rendering
+   - Navigation functionality
+   - State management
+
+2. Navigation Tests:
+   - Link functionality
+   - Route handling
+   - Component rendering
+
+To run App2 tests:
 ```bash
 cd app2
-npm start
+npm test
 ```
+
+## Available Scripts
+
+In the root directory:
+
+- `npm start` - Starts all applications concurrently
+- `npm run start:main` - Starts only the main application
+- `npm run start:app1` - Starts only App1
+- `npm run start:app2` - Starts only App2
 
 ## Technology Stack
 
 - React 18
 - TypeScript
-- Webpack 5
-- Module Federation
-- React Router DOM
-- Redux Toolkit (App1)
-- SCSS
+- Webpack 5 with Module Federation
+- React Router v7
+- Jest & React Testing Library for testing
+- SASS for styling
 
-## Key Features
+## Module Federation Configuration
 
-- Independent deployment of micro-frontends
-- Shared component library
-- Consistent routing across applications
-- State management integration
-- TypeScript support throughout
-- Modern development tooling
+The project uses Webpack 5's Module Federation to share components and functionality between applications:
 
-## Project Structure
+- Main App exposes:
+  - Shared components
+  - Common utilities
+  - Global state management
 
-Each application follows a similar structure:
-```
-app/
-├── src/
-│   ├── components/     # Reusable components
-│   ├── pages/         # Page components
-│   ├── App.tsx        # Main application component
-│   ├── index.ts       # Entry point
-│   └── bootstrap.tsx  # Bootstrap file
-├── public/            # Static files
-├── webpack.config.js  # Webpack configuration
-└── package.json       # Dependencies and scripts
-```
+- App1 exposes:
+  - Dashboard component
+  - List component
+  - Navigation components
 
-## Module Federation
+- App2 exposes:
+  - Home component
+  - Navigation components
+  - Feature components
 
-The project uses Webpack 5's Module Federation to:
-- Share components between applications
-- Enable independent deployment
-- Maintain consistent routing
-- Share common dependencies
+## Development
 
-## Available Scripts
+1. Each application can be developed independently
+2. Changes in shared components will be reflected across all applications
+3. Hot Module Replacement (HMR) is enabled for all applications
+4. TypeScript is configured for type safety across all applications
 
-From the root directory:
-- `npm start` - Starts all applications
-- `npm run build` - Builds all applications
-- `npm run serve` - Serves all production builds
+## Testing Strategy
+
+The project follows a comprehensive testing strategy:
+
+1. Unit Tests:
+   - Component rendering
+   - State management
+   - Utility functions
+
+2. Integration Tests:
+   - Component interactions
+   - Navigation flows
+   - Data fetching
+
+3. Test Coverage:
+   - App1: Comprehensive coverage of all components
+   - App2: Core functionality coverage
+   - Main App: Focus on integration and routing
 
 ## Contributing
 
-1. Follow the established project structure
-2. Maintain TypeScript best practices
-3. Keep components isolated and reusable
-4. Update documentation as needed
-5. Follow the development guidelines in each application's README
+1. Create a feature branch
+2. Make your changes
+3. Add tests for new functionality
+4. Submit a pull request
 
 ## License
 
-[Your License Here]
+MIT

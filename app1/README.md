@@ -106,3 +106,99 @@ npm start
 - Redux store for favorites
 - Persistent state across views
 - Optimized performance
+
+## Testing
+
+The application uses Jest and React Testing Library for comprehensive testing.
+
+### Running Tests
+
+```bash
+# Run all tests
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run tests with coverage
+npm run test:coverage
+```
+
+### Test Structure
+
+```
+src/
+├── __tests__/           # Test files
+│   ├── components/      # Component tests
+│   │   ├── NavigationButton/
+│   │   ├── PhotoCard/
+│   │   └── FavoritesSection/
+│   └── pages/          # Page component tests
+│       ├── Dashboard/
+│       └── List/
+└── setupTests.ts       # Test setup configuration
+```
+
+### Test Configuration
+
+- Jest is configured to handle TypeScript, SCSS modules, and React components
+- React Testing Library is used for component testing
+- Redux store is mocked for component testing
+- Router context is provided for navigation testing
+
+### Writing Tests
+
+Example test structure with Redux and Router:
+
+```typescript
+import { render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import { configureStore } from '@reduxjs/toolkit';
+
+const createMockStore = () => {
+  return configureStore({
+    reducer: {
+      favorites: favoritesReducer
+    }
+  });
+};
+
+const renderWithProviders = (component: React.ReactElement) => {
+  const store = createMockStore();
+  return render(
+    <Provider store={store}>
+      <BrowserRouter>
+        {component}
+      </BrowserRouter>
+    </Provider>
+  );
+};
+
+describe('Component', () => {
+  it('renders correctly', () => {
+    renderWithProviders(<Component />);
+    expect(screen.getByText('Expected Text')).toBeInTheDocument();
+  });
+});
+```
+
+### Test Coverage
+
+The test suite includes:
+- Component rendering tests
+- Redux state management tests
+- Navigation and routing tests
+- User interaction tests
+- API integration tests
+
+To generate a coverage report:
+```bash
+npm run test:coverage
+```
+
+This will show:
+- Statement coverage
+- Branch coverage
+- Function coverage
+- Line coverage
