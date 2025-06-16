@@ -13,6 +13,8 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/list" element={<List />} />
+          <Route path="/app1" element={<Dashboard />} />
+          <Route path="/app1/list" element={<List />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>

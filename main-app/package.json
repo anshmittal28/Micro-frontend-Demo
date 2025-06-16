@@ -42,9 +42,10 @@
     "style-loader": "^4.0.0"
   },
   "scripts": {
-    "start": "concurrently \"npm run start:main\" \"npm run start:app1\"",
+    "start": "concurrently \"npm run start:main\" \"npm run start:app1\" \"npm run start:app2\"",
     "start:main": "webpack serve",
     "start:app1": "cd ../app1 && npm start",
+    "start:app2": "cd ../app2 && npm start",
     "build": "webpack --mode production",
     "serve": "serve dist -p 3000",
     "clean": "rm -rf dist"

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './NavigationButton.scss';
 
 interface NavigationButtonProps {
@@ -8,13 +8,11 @@ interface NavigationButtonProps {
 }
 
 const NavigationButton: React.FC<NavigationButtonProps> = ({ to, label }) => {
-  const navigate = useNavigate();
-
   return (
-    <button onClick={() => navigate(to)} className="navigation-button">
+    <Link to={to} className="navigation-button">
       {label}
-    </button>
+    </Link>
   );
 };
 
-export default NavigationButton; 
+export default NavigationButton;

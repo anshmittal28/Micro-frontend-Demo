@@ -18,6 +18,17 @@ module.exports = (env, argv) => {
       headers: {
         "Access-Control-Allow-Origin": "*",
       },
+      historyApiFallback: {
+        rewrites: [
+          { from: /^\/app1/, to: '/index.html' },
+          { from: /^\/app2/, to: '/index.html' },
+          { from: /./, to: '/index.html' }
+        ]
+      },
+      hot: true,
+      static: {
+        directory: path.join(__dirname, 'public'),
+      },
     },
     resolve: {
       extensions: [".ts", ".tsx", ".js"],
@@ -73,6 +84,7 @@ module.exports = (env, argv) => {
         name: "host",
         remotes: {
           app1: "app1@http://localhost:3001/remoteEntry.js",
+          app2: "app2@http://localhost:3002/remoteEntry.js",
         },
         shared: {
           ...deps,

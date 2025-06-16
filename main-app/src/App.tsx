@@ -5,13 +5,14 @@ import Footer from './components/Footer/Footer';
 import SideMenu from './components/SideMenu/SideMenu';
 import './App.scss';
 
-// Lazy load the micro-frontends
-// const PhotoGallery = React.lazy(() => import('photo-gallery/App'));
-// const Placeholder = React.lazy(() => import('placeholder/App'));
-
 const App1 = lazy(() => import('app1/App').catch(() => {
   console.error('Error loading App1');
   return { default: () => <div>Error loading App1</div> };
+}));
+
+const App2 = lazy(() => import('app2/App').catch(() => {
+  console.error('Error loading App2');
+  return { default: () => <div>Error loading App2</div> };
 }));
 
 const App = () => {
@@ -24,8 +25,9 @@ const App = () => {
           <div className="content">
             <Suspense fallback={<div>Loading...</div>}>
               <Routes>
-                <Route path="/*" element={<App1 />} />
-                <Route path="/app2" element={<div>This is app2</div>} />
+                <Route path="/app1/*" element={<App1 />} />
+                <Route path="/app2/*" element={<App2 />} />
+                <Route path="/" element={<App1 />} />
               </Routes>
             </Suspense>
           </div>

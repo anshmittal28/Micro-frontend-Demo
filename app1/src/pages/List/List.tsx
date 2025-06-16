@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import NavigationButton from '../../components/NavigationButton/NavigationButton';
 import PhotoCard from '../../components/PhotoCard/PhotoCard';
 import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
@@ -13,7 +12,6 @@ interface Photo {
 }
 
 const List: React.FC = () => {
-  const navigate = useNavigate();
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
@@ -55,7 +53,7 @@ const List: React.FC = () => {
     <div className="list-page">
       <div className="list-header">
         <h1>Photo List</h1>
-        <NavigationButton to="/" label="Back to Dashboard" />
+        <NavigationButton to="/app1" label="Back to Dashboard" />
       </div>
       
       <div className="photos-container">

@@ -1,156 +1,147 @@
 # Micro-Frontend Demo
 
-This is a demonstration of a micro-frontend architecture using Module Federation with Webpack 5. The project consists of a main application (host) and a remote application (app1).
+A demonstration of a micro-frontend architecture using Module Federation with Webpack 5.
 
-## Project Structure
+## Project Overview
+
+This project demonstrates a micro-frontend architecture with three applications:
+- Main App (Host) - Port 3000
+- App1 (Remote) - Port 3001
+- App2 (Remote) - Port 3002
+
+## Architecture
 
 ```
 micro-frontend-demo/
-├── main-app/          # Host application (port 3000)
-├── app1/             # Remote application (port 3001)
-├── package.json      # Root package.json for managing all applications
-└── README.md         # This file
+├── main-app/          # Host application
+├── app1/             # Remote application 1
+└── app2/             # Remote application 2
 ```
 
-## Technologies Used
+### Main App (Host)
+- Serves as the container application
+- Manages routing and navigation
+- Integrates remote applications
+- Provides shared components and utilities
 
-- React 18
-- TypeScript
-- Webpack 5 with Module Federation
-- React Router DOM
-- Redux Toolkit
-- SCSS for styling
+### App1 (Remote)
+- Provides dashboard and list functionality
+- Implements infinite scroll
+- Manages photo gallery
+- Handles favorites functionality
+
+### App2 (Remote)
+- Extends main application functionality
+- Independent deployment capability
+- Shared component integration
 
 ## Getting Started
 
-### Prerequisites
-
-- Node.js (v14 or higher)
-- npm (v6 or higher)
-
-### Installation
-
-1. Install dependencies for all applications:
+1. Clone the repository:
 ```bash
-npm run install:all
+git clone <repository-url>
+cd micro-frontend-demo
 ```
 
-This will install dependencies for:
-- Root project
-- Main application
-- App1
-
-### Running the Applications
-
-To start both applications simultaneously:
-
+2. Install dependencies for all applications:
 ```bash
+npm install
+cd main-app && npm install
+cd ../app1 && npm install
+cd ../app2 && npm install
+```
+
+3. Start all applications:
+```bash
+# From root directory
 npm start
 ```
 
 This will start:
-- Main application on http://localhost:3000
+- Main App on http://localhost:3000
 - App1 on http://localhost:3001
-
-### Available Scripts
-
-- `npm start` - Starts both applications concurrently
-- `npm run install:all` - Installs dependencies for all applications
-- `npm run build` - Builds all applications
-- `npm run build:main` - Builds only the main application
-- `npm run build:app1` - Builds only app1
-
-## Application Details
-
-### Main Application (Host)
-
-- Port: 3000
-- Entry point: `main-app/src/index.ts`
-- Features:
-  - Module Federation host configuration
-  - Shared components (Header, Footer, SideMenu)
-  - Integration of remote applications
-
-### App1 (Remote)
-
-- Port: 3001
-- Entry point: `app1/src/index.ts`
-- Features:
-  - Module Federation remote configuration
-  - Dashboard and List views
-  - Redux state management
-  - Infinite scroll implementation
-
-## Module Federation Configuration
-
-The project uses Webpack 5's Module Federation to share code between applications. Key configurations:
-
-### Main App (Host)
-```javascript
-new ModuleFederationPlugin({
-  name: "host",
-  remotes: {
-    app1: "app1@http://localhost:3001/remoteEntry.js",
-  },
-  shared: {
-    react: { singleton: true, eager: true },
-    "react-dom": { singleton: true, eager: true },
-    "react-router-dom": { singleton: true, eager: true },
-    // ... other shared dependencies
-  },
-})
-```
-
-### App1 (Remote)
-```javascript
-new ModuleFederationPlugin({
-  name: "app1",
-  filename: "remoteEntry.js",
-  exposes: {
-    "./App": "./src/App.tsx",
-  },
-  shared: {
-    react: { singleton: true, eager: true },
-    "react-dom": { singleton: true, eager: true },
-    // ... other shared dependencies
-  },
-})
-```
+- App2 on http://localhost:3002
 
 ## Development
 
-### Adding New Features
+Each application can be developed independently:
 
-1. For the main application:
-   - Add new components in `main-app/src/components`
-   - Update routes in `main-app/src/App.tsx`
-
-2. For App1:
-   - Add new components in `app1/src/components`
-   - Add new pages in `app1/src/pages`
-   - Update routes in `app1/src/App.tsx`
-
-### Best Practices
-
-1. Keep shared dependencies in sync between applications
-2. Use TypeScript for better type safety
-3. Follow the established project structure
-4. Use SCSS modules for component-specific styling
-
-## Troubleshooting
-
-If you encounter issues:
-
-1. Clear node_modules and reinstall:
+### Main App
 ```bash
-rm -rf node_modules
-npm run install:all
+cd main-app
+npm start
 ```
 
-2. Check if both applications are running on correct ports
-3. Ensure all shared dependencies are properly configured in webpack.config.js
-4. Check browser console for any Module Federation related errors
+### App1
+```bash
+cd app1
+npm start
+```
+
+### App2
+```bash
+cd app2
+npm start
+```
+
+## Technology Stack
+
+- React 18
+- TypeScript
+- Webpack 5
+- Module Federation
+- React Router DOM
+- Redux Toolkit (App1)
+- SCSS
+
+## Key Features
+
+- Independent deployment of micro-frontends
+- Shared component library
+- Consistent routing across applications
+- State management integration
+- TypeScript support throughout
+- Modern development tooling
+
+## Project Structure
+
+Each application follows a similar structure:
+```
+app/
+├── src/
+│   ├── components/     # Reusable components
+│   ├── pages/         # Page components
+│   ├── App.tsx        # Main application component
+│   ├── index.ts       # Entry point
+│   └── bootstrap.tsx  # Bootstrap file
+├── public/            # Static files
+├── webpack.config.js  # Webpack configuration
+└── package.json       # Dependencies and scripts
+```
+
+## Module Federation
+
+The project uses Webpack 5's Module Federation to:
+- Share components between applications
+- Enable independent deployment
+- Maintain consistent routing
+- Share common dependencies
+
+## Available Scripts
+
+From the root directory:
+- `npm start` - Starts all applications
+- `npm run build` - Builds all applications
+- `npm run serve` - Serves all production builds
+
+## Contributing
+
+1. Follow the established project structure
+2. Maintain TypeScript best practices
+3. Keep components isolated and reusable
+4. Update documentation as needed
+5. Follow the development guidelines in each application's README
 
 ## License
 
-This project is licensed under the MIT License.
+[Your License Here]

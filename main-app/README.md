@@ -1,46 +1,89 @@
-# Getting Started with Create React App
+# Main Application (Host)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the host application that integrates and manages the micro-frontends (App1 and App2).
+
+## Overview
+
+- Port: 3000
+- Role: Host application
+- Purpose: Integrates and manages micro-frontends
+
+## Features
+
+- Module Federation host configuration
+- Shared components (Header, Footer, SideMenu)
+- Integration of remote applications
+- Centralized navigation
+- Shared layout and styling
+
+## Project Structure
+
+```
+main-app/
+├── src/
+│   ├── components/     # Shared components
+│   │   ├── Header/
+│   │   ├── Footer/
+│   │   └── SideMenu/
+│   ├── styles/        # Global styles
+│   ├── App.tsx        # Main application component
+│   ├── index.ts       # Entry point
+│   └── bootstrap.tsx  # Bootstrap file
+├── public/            # Static files
+├── webpack.config.js  # Webpack configuration
+└── package.json       # Dependencies and scripts
+```
+
+## Module Federation Configuration
+
+```javascript
+new ModuleFederationPlugin({
+  name: "host",
+  remotes: {
+    app1: "app1@http://localhost:3001/remoteEntry.js",
+    app2: "app2@http://localhost:3002/remoteEntry.js",
+  },
+  shared: {
+    react: { singleton: true, eager: true },
+    "react-dom": { singleton: true, eager: true },
+    "react-router-dom": { singleton: true, eager: true },
+  },
+})
+```
 
 ## Available Scripts
 
-In the project directory, you can run:
+- `npm start` - Starts the development server
+- `npm run build` - Builds the application for production
+- `npm run serve` - Serves the production build
+- `npm run clean` - Cleans the build directory
 
-### `npm start`
+## Dependencies
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- React 18
+- React Router DOM
+- Webpack 5
+- TypeScript
+- SCSS
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Development
 
-### `npm test`
+1. Install dependencies:
+```bash
+npm install
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. Start the development server:
+```bash
+npm start
+```
 
-### `npm run build`
+3. Access the application at http://localhost:3000
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Integration with Micro-frontends
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The main application integrates two micro-frontends:
+- App1 (port 3001): Dashboard and List views
+- App2 (port 3002): Simple placeholder application
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Both applications are loaded dynamically using Module Federation and can be accessed through the side menu navigation.
