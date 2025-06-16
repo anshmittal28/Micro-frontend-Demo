@@ -147,6 +147,3 @@ The project follows a comprehensive testing strategy:
 3. Add tests for new functionality
 4. Submit a pull request
 
-## License
-
-MIT
